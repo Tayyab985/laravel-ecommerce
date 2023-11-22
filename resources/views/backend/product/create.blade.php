@@ -128,14 +128,6 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        
-        <div class="form-group">
-          <label for="stock">Amazon Link <span class="text-danger">*</span></label>
-          <input id="quantity" type="number" name="stock" min="0" placeholder="Enter quantity"  value="{{old('stock')}}" class="form-control">
-          @error('stock')
-          <span class="text-danger">{{$message}}</span>
-          @enderror
-        </div>
 
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
@@ -146,6 +138,28 @@
           @error('status')
           <span class="text-danger">{{$message}}</span>
           @enderror
+        </div>
+        <div class="form-gorup mb-4">
+          <label for="links" class="col-form-label">Add Stores Link </label>
+          <select name="links" class="form-control links">
+            <option value="">Select Option</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+          </select>
+          <div class="row d-none links-div mt-4">
+            <div class="col-4">
+              <label for="stock">Amazon  Link</label>
+              <input id="amazon_link" type="text" name="amazon_link" placeholder="Add Amazon Store Link"  value="{{old('amazon_link')}}" class="form-control">
+            </div>
+            <div class="col-4">
+              <label for="stock">Ebay  Link</label>
+              <input id="ebay_link" type="text" name="ebay_link" placeholder="Add Ebay Store Link"  value="{{old('ebay_link')}}" class="form-control">
+            </div>
+            <div class="col-4">
+              <label for="stock">Walmart  Link</label>
+              <input id="walmart_link" type="text" name="walmart_link" placeholder="Add Walmart Store Link"  value="{{old('walmart_link')}}" class="form-control">
+            </div>
+          </div>
         </div>
         <div class="form-group mb-3">
           <button type="reset" class="btn btn-warning">Reset</button>
@@ -227,6 +241,15 @@
       });
     }
     else{
+    }
+  })
+
+  $('.links').on('change', function(){
+    if($(this).val() == 'yes'){
+      $('.links-div').removeClass('d-none');
+    }
+    else{
+      $('.links-div').addClass('d-none');
     }
   })
 </script>
