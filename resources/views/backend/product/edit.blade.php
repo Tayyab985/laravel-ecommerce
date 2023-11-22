@@ -146,6 +146,30 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
+
+        <div class="form-gorup mb-4">
+          <label for="links" class="col-form-label">Add Stores Link </label>
+          <select name="links" class="form-control links">
+            <option value="">Select Option</option>
+              <option value="yes" {{ ((!empty($product->amazon_link) || !empty($product->ebay_link) || !empty($product->walmart_link)) ? 'SELECTED' : '') }}>Yes</option>
+              <option value="no">No</option>
+          </select>
+          <div class="row links-div mt-4 <?php echo ((!empty($product->amazon_link) || !empty($product->ebay_link) || !empty($product->walmart_link)) ? '' : 'd-none') ?> ">
+            <div class="col-4">
+              <label for="stock">Amazon  Link</label>
+              <input id="amazon_link" type="text" name="amazon_link" placeholder="Add Amazon Store Link"  value="{{$product->amazon_link}}" class="form-control">
+            </div>
+            <div class="col-4">
+              <label for="stock">Ebay  Link</label>
+              <input id="ebay_link" type="text" name="ebay_link" placeholder="Add Ebay Store Link"  value="{{$product->ebay_link}}" class="form-control">
+            </div>
+            <div class="col-4">
+              <label for="stock">Walmart  Link</label>
+              <input id="walmart_link" type="text" name="walmart_link" placeholder="Add Walmart Store Link"  value="{{$product->walmart_link}}" class="form-control">
+            </div>
+          </div>
+        </div>
+
         <div class="form-group mb-3">
            <button class="btn btn-success" type="submit">Update</button>
         </div>
@@ -231,5 +255,17 @@
         if(child_cat_id!=null){
             $('#cat_id').change();
         }
+
+        $('.links').on('change', function(){
+          if($(this).val() == 'yes'){
+            $('.links-div').removeClass('d-none');
+          }
+          else{
+            $('.links-div').addClass('d-none');
+            $('#amazon_link').val('');
+            $('#ebay_link').val('');
+            $('#walmart_link').val('');
+          }
+        })
 </script>
 @endpush

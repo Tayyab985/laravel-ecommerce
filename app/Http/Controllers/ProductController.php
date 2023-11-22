@@ -44,6 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        
         // return $request->all();
         $this->validate($request,[
             'title'=>'string|required',
@@ -79,6 +80,8 @@ class ProductController extends Controller
         }
         // return $size;
         // return $data;
+        unset($data['links']);
+        
         $status=Product::create($data);
         if($status){
             request()->session()->flash('success','Product Successfully added');
@@ -111,6 +114,7 @@ class ProductController extends Controller
     {
         $brand=Brand::get();
         $product=Product::findOrFail($id);
+        
         $category=Category::where('is_parent',1)->get();
         $items=Product::where('id',$id)->get();
         // return $items;
@@ -156,6 +160,7 @@ class ProductController extends Controller
             $data['size']='';
         }
         // return $data;
+        unset($data['links']);
         $status=$product->fill($data)->save();
         if($status){
             request()->session()->flash('success','Product Successfully updated');
