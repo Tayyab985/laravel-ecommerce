@@ -24,7 +24,7 @@
     <!-- Start Checkout -->
     <section class="shop checkout section">
         <div class="container">
-                <form class="form" method="POST" action="{{route('cart.order')}}">
+                <form class="form order_form" method="POST" action="{{route('cart.order')}}">
                     @csrf
                     <div class="row"> 
 
@@ -401,7 +401,7 @@
                                         <div class="checkbox">
                                             {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
                                             <form-group>
-                                                <input name="payment_method"  type="radio" value="cod"> <label> Cash On Delivery</label><br>
+                                                <!-- <input name="payment_method"  type="radio" value="cod"> <label> Cash On Delivery</label><br> -->
                                                 <!-- <input name="payment_method"  type="radio" value="paypal"> <label> PayPal</label>  -->
                                                 <input name="payment_method"  type="radio" value="futue_link"> <label> Futue Link </label><br>
                                             </form-group>
@@ -418,18 +418,41 @@
                                 </div>
                                 <!--/ End Payment Method Widget -->
                                 <!-- Button Widget -->
-                                <div class="single-widget get-button">
+                                <div class="single-widget get-button procced_to">
                                     <div class="content">
                                         <div class="button">
-                                            <button type="submit" class="btn">proceed to checkout</button>
+                                            <button type="submit" class="btn procced_to_pay">Proceed</button>
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <!--/ End Button Widget -->
                             </div>
                         </div>
                     </div>
                 </form>
+                <div class="order-details">
+                    <form class="d-none" name='frmMyOrder' id='frmMyOrder' action='https://shopvseven.futuelink.com/shop-product-pv.php' method='post' target="_blank">
+                        <input type='hidden' name='business' value='' />
+                        <input type='hidden' name='ak' value='' />
+                        <input type='hidden' name='invId' value='' readonly />
+                        <input type='hidden' name='amount' value="" readonly />
+                        <input type='hidden' name='currency' value='' />
+                        <input type='hidden' name='cancelurl' value='' />
+                        <input type='hidden' name='successurl' value='' />
+                        <input type='hidden' name='token' value='' />
+                        <input type='hidden' name='futuelink' value='1' />
+                        <div class="single-widget get-button procced_to">
+                            <div class="content">
+                                <div class="button">
+                                    <button type="submit" class="btn">Pay</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <input type="submit" value="Submit" /> -->
+                    </form>
+                </div>
         </div>
     </section>
     <!--/ End Checkout -->
@@ -500,6 +523,30 @@
             </div>
         </div>
     </section>
+
+
+
+    <div class="modal" tabindex="-1" id="futue_pay_model" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="product_name">Product Name :  adasdasdds</h4>
+                    
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="submit" class="btn btn-primary">Pay</button> -->
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- End Shop Newsletter -->
 @endsection
 @push('styles')
@@ -580,4 +627,38 @@
 
 	</script>
 
+    <script>
+        $('.order_form').on('submit', function(event){
+            event.preventDefault();
+            $('.preloader').css('display', 'block');
+            var formData = new FormData(this);
+
+            var postUrl = $(this).attr('action');
+            $.ajax({
+                url: postUrl,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType : false,
+                success: function(response) {
+                    $('.preloader').css('display', 'none');
+                    $('.procced_to_pay').addClass('d-none');
+                    $('#frmMyOrder').removeClass('d-none');
+                    $('input[name="business"]').val(response.order.username);
+                    $('input[name="ak"]').val(response.order.apikey);
+                    $('input[name="invId"]').val(response.order.order_number);
+                    $('input[name="amount"]').val(response.order.total_amount);
+                    $('input[name="currency"]').val(response.order.currency);
+                    $('input[name="cancelurl"]').val('');
+                    $('input[name="successurl"]').val('');
+                    $('input[name="token"]').val(response.order.token);
+                    
+                    // Handle success response
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                }
+            })
+        })
+    </script>
 @endpush

@@ -55,7 +55,7 @@ class OrderController extends Controller
             'email'=>'string|required'
         ]);
         // return $request->all();
-
+        
         if(empty(Cart::where('user_id',auth()->user()->id)->where('order_id',null)->first())){
             request()->session()->flash('error','Cart is Empty !');
             return back();
@@ -118,14 +118,17 @@ class OrderController extends Controller
         }
         // return $order_data['total_amount'];
         $order_data['status']="new";
-        if(request('payment_method')=='paypal'){
-            $order_data['payment_method']='paypal';
-            $order_data['payment_status']='paid';
-        }
-        else{
-            $order_data['payment_method']='cod';
-            $order_data['payment_status']='Unpaid';
-        }
+        // if(request('payment_method')=='paypal'){
+        //     $order_data['payment_method']='paypal';
+        //     $order_data['payment_status']='paid';
+        // }
+        // else{
+        //     $order_data['payment_method']='cod';
+        //     $order_data['payment_status']='Unpaid';
+        // }
+        $order_data['payment_method']='futue_link';
+        $order_data['payment_status']='unpaid';
+        
         $order->fill($order_data);
         $status=$order->save();
         if($order)
@@ -137,8 +140,16 @@ class OrderController extends Controller
             'fas'=>'fa-file-alt'
         ];
         Notification::send($users, new StatusNotification($details));
-        if(request('payment_method')=='paypal'){
-            return redirect()->route('payment')->with(['id'=>$order->id]);
+        // if(request('payment_method')=='paypal'){
+        //     return redirect()->route('payment')->with(['id'=>$order->id]);
+        // }
+        if(request('payment_method')=='futue_link'){
+            $order['apikey'] = env('FUTUE_APIKEY');
+            $order['username'] = env('FUTUE_USERNAME');
+            $order['currency'] = 'USD';
+            $order['token'] = Str::random(20);
+            
+            return response()->json(['success' => true, 'order' => $order]);
         }
         else{
             session()->forget('cart');
