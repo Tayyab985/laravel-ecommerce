@@ -277,6 +277,7 @@
 																	</div>
 																	@foreach($product_detail['getReview'] as $data)
 																	<!-- Single Rating -->
+																	@if($data->admin_status == 'approve')
 																	<div class="single-rating">
 																		<div class="rating-author">
 																			@if($data->user_info['photo'])
@@ -304,6 +305,7 @@
 																		</div>
 																	</div>
 																	<!--/ End Single Rating -->
+																	@endif
 																	@endforeach
 																</div>
 																

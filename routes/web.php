@@ -48,6 +48,9 @@
 
     Route::get('user/register', [FrontendController::class, 'register'])->name('register.form');
     Route::post('user/register', [FrontendController::class, 'registerSubmit'])->name('register.submit');
+
+    Route::post('wholesale/register', [FrontendController::class, 'wholesaleRegisterSubmit'])->name('wholesale.register.submit');
+
 // Reset password
     Route::post('password-reset', [FrontendController::class, 'showResetForm'])->name('password.reset');
 // Socialite

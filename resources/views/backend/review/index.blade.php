@@ -24,10 +24,11 @@
               <th>Rate</th>
               <th>Date</th>
               <th>Status</th>
+              <th>Request</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tfoot>
+          <!-- <tfoot>
             <tr>
               <th>S.N.</th>
               <th>Review By</th>
@@ -38,7 +39,7 @@
               <th>Status</th>
               <th>Action</th>
               </tr>
-          </tfoot>
+          </tfoot> -->
           <tbody>
             @foreach($reviews as $review)
                 <tr>
@@ -63,6 +64,13 @@
                           <span class="badge badge-success">{{$review->status}}</span>
                         @else
                           <span class="badge badge-warning">{{$review->status}}</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($review->admin_status=='approve')
+                          <span class="badge badge-success">{{$review->admin_status}}</span>
+                        @else
+                          <span class="badge badge-warning">{{$review->admin_status}}</span>
                         @endif
                     </td>
                     <td>

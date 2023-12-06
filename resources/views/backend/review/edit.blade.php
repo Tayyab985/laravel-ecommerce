@@ -10,6 +10,15 @@
       @csrf
       @method('PATCH')
       <div class="form-group">
+        <label for="admin_status">Request for Review:</label>
+        <select name="admin_status" class="form-control">
+          <option value="">--Select Status--</option>
+          <option value="pending" {{(($review->admin_status=='pending')? 'selected' : '')}}>Pending</option>
+          <option value="approve" {{(($review->admin_status=='approve')? 'selected' : '')}}>Approve</option>
+          <option value="reject" {{(($review->admin_status=='reject')? 'selected' : '')}}>Reject</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="name">Review By:</label>
         <input type="text" disabled class="form-control" value="{{$review->user_info->name}}">
       </div>

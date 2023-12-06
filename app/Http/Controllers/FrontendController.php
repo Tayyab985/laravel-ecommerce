@@ -9,6 +9,7 @@ use App\Models\PostCategory;
 use App\Models\Post;
 use App\Models\Cart;
 use App\Models\Brand;
+use App\Models\ResellerDocument;
 use App\User;
 use Auth;
 use Session;
@@ -17,6 +18,8 @@ use DB;
 use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 class FrontendController extends Controller
 {
    
@@ -397,6 +400,97 @@ class FrontendController extends Controller
             return back();
         }
     }
+
+    public function wholesaleRegisterSubmit(Request $request){
+        $this->validate($request,[
+            'name'=>'string|required|min:2',
+            'email'=>'string|required|unique:users,email',
+            'password'=>'required|min:6|confirmed',
+            'phone'=>'required',
+            'company'=>'string|required',
+            'tax_id'=>'required',
+            'address'=>'string|required',
+            'apartment'=>'string|required',
+            'city'=>'string|required',
+            'country'=>'string|required',
+            'state'=>'string|required',
+            'zip'=>'required',
+            'comments'=>'string|required',
+            'documents'=>'required',
+            'ein'=>'required',
+        ]);
+      
+        $data=$request->all();
+        // Remove the 'documents' key if it exists
+        if (array_key_exists('documents', $data)) {
+            unset($data['documents']);
+        }
+        if (array_key_exists('ein', $data)) {
+            unset($data['ein']);
+        }
+
+        $dataTwo = [];
+        $check=$this->wsCreate($data);
+        Session::put('user',$data['email']);
+
+        $dataTwo['user_id'] = $check->id;
+        if ($request->hasFile('documents')) {
+            $file = $request->file('documents');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            Storage::disk('local')->putFileAs('assets/documents/', $file, $file_name);
+            $fileUrl = Storage::disk('local')->url('assets/documents/' . $file_name);
+            $dataTwo['documents'] = $fileUrl;
+        }
+
+        if ($request->hasFile('ein')) {
+            $file = $request->file('ein');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            Storage::disk('local')->putFileAs('assets/documents/', $file, $file_name);
+            $fileUrl = Storage::disk('local')->url('assets/documents/' . $file_name);
+            $dataTwo['ein'] = $fileUrl;
+        }
+
+        if($dataTwo){
+            $this->filesAdded($dataTwo);
+        }
+        
+        if($check){
+            request()->session()->flash('success','Successfully registered');
+            return redirect()->route('home');
+        }
+        else{
+            request()->session()->flash('error','Please try again!');
+            return back();
+        }
+    }
+
+    public function filesAdded(array $data){
+        return ResellerDocument::create([
+            'user_id'   => $data['user_id'],
+            'documents' => $data['documents'],
+            'ein'       => $data['ein'],
+        ]);
+    }
+
+    public function wsCreate(array $data){
+        return User::create([
+            'name'      =>  $data['name'],
+            'email'     =>  $data['email'],
+            'password'  =>  Hash::make($data['password']),
+            'status'    =>  'active',
+            'phone'     =>  $data['phone'],
+            'company'   =>  $data['company'],
+            'tax_id'    =>  $data['tax_id'],
+            'address'   =>  $data['address'],
+            'apartment' =>  $data['apartment'],
+            'city'      =>  $data['city'],
+            'country'   =>  $data['country'],
+            'state'     =>  $data['state'],
+            'zip'       =>  $data['zip'],
+            'comments'  =>  $data['comments'],
+        ]);
+    }
+
     public function create(array $data){
         return User::create([
             'name'=>$data['name'],
