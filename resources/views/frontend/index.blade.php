@@ -1,6 +1,15 @@
 @extends('frontend.layouts.master')
 @section('title','E-SHOP || HOME PAGE')
 @section('main-content')
+
+<style>
+    img {
+        width: auto !important;
+        height: auto !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+</style>
 <!-- Slider Area -->
 @if(count($banners)>0)
     <section id="Gslider" class="carousel slide" data-ride="carousel">
