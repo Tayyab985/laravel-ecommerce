@@ -67,6 +67,14 @@
         </div>
 
         <div class="form-group">
+          <label for="cost_price" class="col-form-label">Cost Price(NRS) <span class="text-danger">*</span></label>
+          <input id="cost_price" type="number" name="cost_price" placeholder="Enter Cost Price"  value="{{old('cost_price')}}" class="form-control">
+          @error('cost_price')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+
+        <div class="form-group">
           <label for="discount" class="col-form-label">Discount(%)</label>
           <input id="discount" type="number" name="discount" min="0" max="100" placeholder="Enter discount"  value="{{old('discount')}}" class="form-control">
           @error('discount')

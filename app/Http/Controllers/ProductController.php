@@ -60,6 +60,7 @@ class ProductController extends Controller
             'status'=>'required|in:active,inactive',
             'condition'=>'required|in:default,new,hot',
             'price'=>'required|numeric',
+            'cost_price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
 
