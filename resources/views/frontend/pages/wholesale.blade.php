@@ -151,7 +151,7 @@
 										</div>
 										<div class="col-12">
 											<div class="form-group">
-												<label>Upload Document<span>*</span></label>
+												<label>Upload Document</label>
 												<input name="documents" type="file" id="documents">
 												@error('documents')
 													<span class="text-danger">{{$message}}</span>
@@ -160,7 +160,7 @@
 										</div>
 										<div class="col-12">
 											<div class="form-group">
-												<label>Upload EIN<span>*</span></label>
+												<label>Upload EIN</label>
 												<input name="ein" type="file" id="ein">
 												@error('ein')
 													<span class="text-danger">{{$message}}</span>

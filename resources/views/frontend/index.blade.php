@@ -2,15 +2,6 @@
 @section('title','E-SHOP || HOME PAGE')
 @section('main-content')
 
-<style>
-    .default-img img {
-        width: 100%;
-        height: 300px !important;
-    }
-    .single-list img{
-        height: 300px !important;
-    }
-</style>
 <!-- Slider Area -->
 @if(count($banners)>0)
     <section id="Gslider" class="carousel slide" data-ride="carousel">

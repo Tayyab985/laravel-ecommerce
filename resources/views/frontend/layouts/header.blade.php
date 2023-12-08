@@ -196,6 +196,7 @@
                                             <!-- <li class="{{Request::path()=='blog' ? 'active' : ''}}"><a href="{{route('blog')}}">Blog</a></li>									 -->
                                                
                                             <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a href="{{route('contact')}}">Contact Us</a></li>
+                                            <li class="{{Request::path()=='whole-sale' ? 'active' : ''}}"><a href="{{route('whole-sale')}}">WHOLESALE</a></li>
                                         </ul>
                                     </div>
                                 </div>

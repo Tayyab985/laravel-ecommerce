@@ -9,7 +9,7 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Users List</h6>
+      <h6 class="m-0 font-weight-bold text-primary float-left">WholeSale List</h6>
       <a href="{{route('users.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add User</a>
     </div>
     <div class="card-body">
@@ -18,7 +18,7 @@
           <thead>
             <tr>
               <th>S.N.</th>
-              <th>Name</th>
+              <th>WholeSale</th>
               <th>Email</th>
               <th>Photo</th>
               <th>Join Date</th>
@@ -53,7 +53,7 @@
                         @endif
                     </td>
                     <td>{{(($user->created_at)? $user->created_at->diffForHumans() : '')}}</td>
-                    <td>{{$user->role}}</td>
+                    <td>{{$user->role == 'user'? 'WholeSale': 'Admin'}}</td>
                     <td>
                         @if($user->status=='active')
                             <span class="badge badge-success">{{$user->status}}</span>

@@ -416,8 +416,8 @@ class FrontendController extends Controller
             'state'=>'string|required',
             'zip'=>'required',
             'comments'=>'string|required',
-            'documents'=>'required',
-            'ein'=>'required',
+            // 'documents'=>'required',
+            //'ein'=>'required',
         ]);
       
         $data=$request->all();
@@ -433,7 +433,6 @@ class FrontendController extends Controller
         $check=$this->wsCreate($data);
         Session::put('user',$data['email']);
 
-        $dataTwo['user_id'] = $check->id;
         if ($request->hasFile('documents')) {
             $file = $request->file('documents');
             $file_name = time() . '_' . $file->getClientOriginalName();
@@ -450,7 +449,9 @@ class FrontendController extends Controller
             $dataTwo['ein'] = $fileUrl;
         }
 
-        if($dataTwo){
+        if(!empty($dataTwo)){
+            $dataTwo['user_id'] = $check->id;
+            
             $this->filesAdded($dataTwo);
         }
         
@@ -465,11 +466,7 @@ class FrontendController extends Controller
     }
 
     public function filesAdded(array $data){
-        return ResellerDocument::create([
-            'user_id'   => $data['user_id'],
-            'documents' => $data['documents'],
-            'ein'       => $data['ein'],
-        ]);
+        return ResellerDocument::create($data);
     }
 
     public function wsCreate(array $data){
