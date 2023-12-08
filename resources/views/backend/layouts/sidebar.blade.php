@@ -99,7 +99,7 @@
     </li>
 
     {{-- Shipping --}}
-    <li class="nav-item">
+    <li class="nav-item" style="display: none;">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#shippingCollapse" aria-expanded="true" aria-controls="shippingCollapse">
           <i class="fas fa-truck"></i>
           <span>Shipping</span>
@@ -133,12 +133,12 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div class="sidebar-heading" style="display: none;">
       Posts
     </div>
 
     <!-- Posts -->
-    <li class="nav-item">
+    <li class="nav-item" style="display: none;">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postCollapse" aria-expanded="true" aria-controls="postCollapse">
         <i class="fas fa-fw fa-folder"></i>
         <span>Posts</span>
@@ -153,7 +153,7 @@
     </li>
 
      <!-- Category -->
-     <li class="nav-item">
+     <li class="nav-item" style="display: none;">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postCategoryCollapse" aria-expanded="true" aria-controls="postCategoryCollapse">
           <i class="fas fa-sitemap fa-folder"></i>
           <span>Category</span>
@@ -168,7 +168,7 @@
       </li>
 
       <!-- Tags -->
-    <li class="nav-item">
+    <li class="nav-item" style="display: none;">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tagCollapse" aria-expanded="true" aria-controls="tagCollapse">
             <i class="fas fa-tags fa-folder"></i>
             <span>Tags</span>
@@ -183,7 +183,7 @@
     </li>
 
       <!-- Comments -->
-      <li class="nav-item">
+      <li class="nav-item" style="display: none;">
         <a class="nav-link" href="{{route('comment.index')}}">
             <i class="fas fa-comments fa-chart-area"></i>
             <span>Comments</span>
@@ -192,7 +192,7 @@
 
 
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    <!-- <hr class="sidebar-divider d-none d-md-block"> -->
      <!-- Heading -->
     <div class="sidebar-heading">
         General Settings
@@ -206,7 +206,7 @@
      <li class="nav-item">
         <a class="nav-link" href="{{route('users.index')}}">
             <i class="fas fa-users"></i>
-            <span>Users</span></a>
+            <span>WholeSale</span></a>
     </li>
      <!-- General settings -->
      <li class="nav-item">

@@ -25,22 +25,24 @@
       <tbody>
         <tr>
             <td>{{$order->id}}</td>
-            <td>{{$order->order_number}}</td>
-            <td>{{$order->first_name}} {{$order->last_name}}</td>
-            <td>{{$order->email}}</td>
-            <td>{{$order->quantity}}</td>
-            <td>${{$order->shipping->price}}</td>
-            <td>${{number_format($order->total_amount,2)}}</td>
+            <td>{{isset($order->order_number) ? $order->order_number: ""}}</td>
+            <td>{{isset($order->first_name) ? $order->first_name:""}} {{ isset($order->last_name) ? $order->last_name:""}}</td>
+            <td>{{isset($order->email) ? $order->email: ""}}</td>
+            <td>{{isset($order->quantity) ? $order->quantity:""}}</td>
+            <td>${{isset($order->shipping->price) ? $order->shipping->price :""}}</td>
+            <td>${{isset($order->total_amount) ? number_format($order->total_amount,2) : ""}}</td>
             <td>
+              @if(isset($order->status))
                 @if($order->status=='new')
-                  <span class="badge badge-primary">{{$order->status}}</span>
+                  <span class="badge badge-primary">{{ isset($order->status) ? $order->status : ""}}</span>
                 @elseif($order->status=='process')
-                  <span class="badge badge-warning">{{$order->status}}</span>
+                  <span class="badge badge-warning">{{ isset($order->status) ? $order->status : "" }}</span>
                 @elseif($order->status=='delivered')
-                  <span class="badge badge-success">{{$order->status}}</span>
+                  <span class="badge badge-success">{{ isset($order->status) ? $order->status : "" }}</span>
                 @else
-                  <span class="badge badge-danger">{{$order->status}}</span>
+                  <span class="badge badge-danger">{{ isset($order->status) ? $order->status : "" }}</span>
                 @endif
+              @endif  
             </td>
             <td>
                 <a href="{{route('order.edit',$order->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
@@ -64,31 +66,31 @@
               <table class="table">
                     <tr class="">
                         <td>Order Number</td>
-                        <td> : {{$order->order_number}}</td>
+                        <td> : {{isset($order->order_number) ? $order->order_number : ""}}</td>
                     </tr>
                     <tr>
-                        <td>Order Date</td>
-                        <td> : {{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
+                        <td>Order Date</td> 
+                        <td> : {{isset($order->created_at) ? $order->created_at->format('D d M, Y') : ""}} at {{isset($order->created_at) ? $order->created_at->format('g : i a') : ""}} </td>
                     </tr>
                     <tr>
                         <td>Quantity</td>
-                        <td> : {{$order->quantity}}</td>
+                        <td> : {{isset($order->quantity) ? $order->quantity : ""}}</td>
                     </tr>
                     <tr>
                         <td>Order Status</td>
-                        <td> : {{$order->status}}</td>
+                        <td> : {{isset($order->status) ? $order->status : ""}}</td>
                     </tr>
                     <tr>
                         <td>Shipping Charge</td>
-                        <td> : $ {{$order->shipping->price}}</td>
+                        <td> : $ {{isset($order->shipping->price) ? $order->shipping->price : ""}}</td>
                     </tr>
                     <tr>
                       <td>Coupon</td>
-                      <td> : $ {{number_format($order->coupon,2)}}</td>
+                      <td> : $ {{isset($order->shipping->price) ? number_format($order->coupon,2): "" }}</td>
                     </tr>
                     <tr>
                         <td>Total Amount</td>
-                        <td> : $ {{number_format($order->total_amount,2)}}</td>
+                        <td> : $ {{isset($order->total_amount) ? number_format($order->total_amount,2): "" }}</td>
                     </tr>
                     <tr>
                         <td>Payment Method</td>
@@ -96,7 +98,7 @@
                     </tr>
                     <tr>
                         <td>Payment Status</td>
-                        <td> : {{$order->payment_status}}</td>
+                        <td> : {{isset($order->payment_status) ? $order->payment_status:""}}</td>
                     </tr>
               </table>
             </div>
@@ -108,27 +110,27 @@
               <table class="table">
                     <tr class="">
                         <td>Full Name</td>
-                        <td> : {{$order->first_name}} {{$order->last_name}}</td>
+                        <td> : {{isset($order->first_name) ? $order->first_name:"" }} {{isset($order->last_name) ? $order->last_name:""}}</td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td> : {{$order->email}}</td>
+                        <td> : {{isset($order->email) ? $order->email:""}}</td>
                     </tr>
                     <tr>
                         <td>Phone No.</td>
-                        <td> : {{$order->phone}}</td>
+                        <td> : {{isset($order->phone) ? $order->phone:""}}</td>
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td> : {{$order->address1}}, {{$order->address2}}</td>
+                        <td> : {{isset($order->address1) ? $order->address1:""}}, {{isset($order->address2) ? $order->address2: ""}}</td>
                     </tr>
                     <tr>
                         <td>Country</td>
-                        <td> : {{$order->country}}</td>
+                        <td> : {{isset($order->country) ? $order->country:""}}</td>
                     </tr>
                     <tr>
                         <td>Post Code</td>
-                        <td> : {{$order->post_code}}</td>
+                        <td> : {{isset($order->post_code) ? $order->post_code:""}}</td>
                     </tr>
               </table>
             </div>
