@@ -24,6 +24,7 @@
 						<div class="single-footer links">
 							<h4>Information</h4>
 							<ul>
+								<li><a href="{{route('whole-sale')}}">WHOLESALE</a></li>
 								<li><a href="{{route('about-us')}}">About Us</a></li>
 								<li><a href="#">Faq</a></li>
 								<li><a href="#">Terms & Conditions</a></li>
