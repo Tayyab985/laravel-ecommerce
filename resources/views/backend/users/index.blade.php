@@ -23,22 +23,11 @@
               <th>Photo</th>
               <th>Join Date</th>
               <th>Role</th>
+              <th>Document</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
-          <!-- <tfoot>
-            <tr>
-                <th>S.N.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Photo</th>
-                <th>Join Date</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-          </tfoot> -->
           <tbody>
             @foreach($users as $user)   
                 <tr>
@@ -54,6 +43,13 @@
                     </td>
                     <td>{{(($user->created_at)? $user->created_at->diffForHumans() : '')}}</td>
                     <td>{{$user->role == 'user'? 'WholeSale': 'Admin'}}</td>
+                    <td>
+                    @if ($user->document)
+                        <a href="{{ asset('storage/files/' . $user->document->ein) }}" download>View Document</a>
+                    @else
+                        N/A
+                    @endif
+                    </td>
                     <td>
                         @if($user->status=='active')
                             <span class="badge badge-success">{{$user->status}}</span>

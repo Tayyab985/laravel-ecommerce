@@ -97,7 +97,7 @@
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
-												<label>Address</label><span>*</span></label>
+												<label>Address<span>*</span></label>
 												<input name="address" type="text" id="address" placeholder="Enter Address">
 												@error('address')
 													<span class="text-danger">{{$message}}</span>
@@ -106,7 +106,7 @@
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
-												<label>Suite/Apt<span>*</span></label>
+												<label>Suite/Apt</label>
 												<input name="apartment" type="text" id="apartment" placeholder="Enter Suite or Apartment">
 												@error('apartment')
 													<span class="text-danger">{{$message}}</span>
@@ -149,7 +149,7 @@
 												@enderror
 											</div>
 										</div>
-										<div class="col-12">
+										<!-- <div class="col-12">
 											<div class="form-group">
 												<label>Upload Document</label>
 												<input name="documents" type="file" id="documents">
@@ -157,7 +157,7 @@
 													<span class="text-danger">{{$message}}</span>
 												@enderror
 											</div>
-										</div>
+										</div> -->
 										<div class="col-12">
 											<div class="form-group">
 												<label>Upload EIN</label>

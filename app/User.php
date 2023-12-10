@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\ResellerDocument;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,5 +40,10 @@ class User extends Authenticatable
 
     public function orders(){
         return $this->hasMany('App\Models\Order');
+    }
+
+    public function document()
+    {
+        return $this->hasOne(ResellerDocument::class);
     }
 }
