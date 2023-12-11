@@ -410,7 +410,7 @@ class FrontendController extends Controller
             'company'=>'string|required',
             'tax_id'=>'required',
             'address'=>'string|required',
-            'apartment'=>'string|required',
+            //'apartment'=>'string|required',
             'city'=>'string|required',
             'country'=>'string|required',
             'state'=>'string|required',
@@ -432,26 +432,21 @@ class FrontendController extends Controller
         $dataTwo = [];
         $check=$this->wsCreate($data);
         Session::put('user',$data['email']);
-
-        if ($request->hasFile('documents')) {
-            $file = $request->file('documents');
-            $file_name = time() . '_' . $file->getClientOriginalName();
-            Storage::disk('local')->putFileAs('assets/documents/', $file, $file_name);
-            $fileUrl = Storage::disk('local')->url('assets/documents/' . $file_name);
-            $dataTwo['documents'] = $fileUrl;
-        }
+        
 
         if ($request->hasFile('ein')) {
             $file = $request->file('ein');
             $file_name = time() . '_' . $file->getClientOriginalName();
-            Storage::disk('local')->putFileAs('assets/documents/', $file, $file_name);
-            $fileUrl = Storage::disk('local')->url('assets/documents/' . $file_name);
-            $dataTwo['ein'] = $fileUrl;
+           
+            $file->storeAs('files', $file_name, 'public');
+
+            // Get the URL of the stored file
+            //$fileUrl = asset('files/' . $file_name);
+            $dataTwo['ein'] = $file_name;
         }
 
         if(!empty($dataTwo)){
             $dataTwo['user_id'] = $check->id;
-            
             $this->filesAdded($dataTwo);
         }
         
