@@ -15,7 +15,8 @@
     use App\Http\Controllers\PayPalController;
     use App\Http\Controllers\NotificationController;
     use App\Http\Controllers\HomeController;
-    use \UniSharp\LaravelFilemanager\Lfm;
+use App\Http\Controllers\IpnController;
+use \UniSharp\LaravelFilemanager\Lfm;
 
     /*
     |--------------------------------------------------------------------------
@@ -206,3 +207,5 @@
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
+
+    Route::post('/ipn', [IpnController::class, 'index'])->name('ipn');

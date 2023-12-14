@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IpnController extends Controller
 {
     function index(Request $request) {
+        
         $paymentId = isset($request['invId']) ? $request['invId'] : '0';
         $status = isset($request['status']) ? $request['status'] : '0';
         $transactionId = isset($request['transactionId']) ? $request['transactionId'] : '';
@@ -14,23 +18,38 @@ class IpnController extends Controller
         $futueLinkInvId = isset($request['ecomInvId']) ? $request['ecomInvId'] : ''; // Your invoice ID at futuelink
         $amount = isset($request['amount']) ? $request['amount'] : ''; // Amount paid at futuelink
     
-        $e['paymentId'] = $paymentId;
-        $e['status'] = $status;
-        $e['transactionId'] = $transactionId;
-        $e['transactionToken'] = $transactionToken;
-        $e['futueLinkInvId'] = $futueLinkInvId;
-        $e['amount'] = $amount;
-        $e = json_encode($e);
+        // $e['paymentId'] = $paymentId;
+        // $e['status'] = $status;
+        // $e['transactionId'] = $transactionId;
+        // $e['transactionToken'] = $transactionToken;
+        // $e['futueLinkInvId'] = $futueLinkInvId;
+        // $e['amount'] = $amount;
+        // $e = json_encode($e);
 
-        $ed = json_decode(utf8_encode($e), true);
-        $ed3 = array();
-
-        $tokenSentWithTransaction = 'XXXXXXXXXXXXXXXXXXXX'; // This is $TOKEN which you sent it at the time of sending order
-        $amountYouSent = 'XXXXXXXXXXXXXXXXXXXX'; // This is $TOKEN which you sent it at the time of sending order
+        // $ed = json_decode(utf8_encode($e), true);
+        // $ed3 = array();
+        $order = Order::where(['user_id' => Auth::user()->id, 'order_number' => $transactionToken])->get()->first();
+        
+        $tokenSentWithTransaction = $order->order_number; // This is $TOKEN which you sent it at the time of sending order
+        $amountYouSent = $order->total_amount; // This is $TOKEN which you sent it at the time of sending order
 
         if ($status == 'success' && $transactionToken == $tokenSentWithTransaction && $amountYouSent == $amount)
         {
-            // YOUR CODE interms of success!
+            Order::where(['user_id' => Auth::user()->id, 'order_number' => $transactionToken])->update(['payment_status' => 'paid']);
+
+            Transaction::create([
+                'order_number' => $order->order_number,
+                'user_id' => Auth::user()->id,
+                'amount' => $order->total_amount,
+                'invId' => $paymentId,
+                'status' => $status,
+                'transactionId' => $transactionId,
+                'token' => $transactionToken,
+                'ecomInvId' => $futueLinkInvId 
+            ]);
+            
+            request()->session()->flash('success','Your product successfully placed in order');
+            return redirect()->route('home');
         }
     
     }

@@ -12,6 +12,7 @@ use Notification;
 use Helper;
 use Illuminate\Support\Str;
 use App\Notifications\StatusNotification;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -147,7 +148,7 @@ class OrderController extends Controller
             $order['apikey'] = env('FUTUE_APIKEY');
             $order['username'] = env('FUTUE_USERNAME');
             $order['currency'] = 'USD';
-            $order['token'] = Str::random(20);
+            $order['token'] = $order_data['order_number'];
             
             return response()->json(['success' => true, 'order' => $order]);
         }
