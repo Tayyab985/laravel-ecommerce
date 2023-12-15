@@ -3,7 +3,7 @@
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Edit User</h5>
+    <h5 class="card-header">Edit WholeSaler</h5>
     <div class="card-body">
       <form method="post" action="{{route('users.update',$user->id)}}">
         @csrf 
@@ -49,7 +49,6 @@
         </div>
         @php 
         $roles=DB::table('users')->select('role')->where('id',$user->id)->get();
-        // dd($roles);
         @endphp
         <div class="form-group">
             <label for="role" class="col-form-label">Role</label>

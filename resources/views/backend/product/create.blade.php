@@ -67,6 +67,14 @@
         </div>
 
         <div class="form-group">
+          <label for="min_purchase_quantity" class="col-form-label">Min Purchase Quantity <span class="text-danger">*</span></label>
+          <input id="min_purchase_quantity" type="number" name="min_purchase_quantity" placeholder="Enter Min Purchase Quantity"  value="{{old('min_purchase_quantity')}}" class="form-control">
+          @error('min_purchase_quantity')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+
+        <div class="form-group">
           <label for="cost_price" class="col-form-label">Cost Price(NRS) <span class="text-danger">*</span></label>
           <input id="cost_price" type="number" name="cost_price" placeholder="Enter Cost Price"  value="{{old('cost_price')}}" class="form-control">
           @error('cost_price')

@@ -56,6 +56,7 @@
                         @else
                             <span class="badge badge-warning">{{$user->status}}</span>
                         @endif
+                       
                     </td>
                     <td>
                         <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>

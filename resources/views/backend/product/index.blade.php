@@ -29,6 +29,7 @@
               <th>Brand</th>
               <th>Stock</th>
               <th>Photo</th>
+              <th>Min Purchase Quantity</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -90,6 +91,7 @@
                             <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
                         @endif
                     </td>
+                    <td> {{$product->min_purchase_quantity}}</td>
                     <td>
                         @if($product->status=='active')
                             <span class="badge badge-success">{{$product->status}}</span>

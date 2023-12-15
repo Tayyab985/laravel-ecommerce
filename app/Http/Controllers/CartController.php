@@ -59,13 +59,20 @@ class CartController extends Controller
             'slug'      =>  'required',
             'quant'      =>  'required',
         ]);
-        // dd($request->quant[1]);
-
-
+        
         $product = Product::where('slug', $request->slug)->first();
         if($product->stock <$request->quant[1]){
             return back()->with('error','Out of stock, You can add other products.');
         }
+
+        if(!empty($product->min_purchase_quantity)){
+            if ($request->quant[1] < $product->min_purchase_quantity) {
+                $msg = 'Minimum Purchase Quantity is '.$product->min_purchase_quantity.". Please Select items accordingly.";
+                request()->session()->flash('error',$msg);
+                return back();
+            }    
+        }
+
         if ( ($request->quant[1] < 1) || empty($product) ) {
             request()->session()->flash('error','Invalid Products');
             return back();

@@ -71,6 +71,14 @@
         </div>
 
         <div class="form-group">
+          <label for="min_purchase_quantity" class="col-form-label">Min Purchase Quantity <span class="text-danger">*</span></label>
+          <input id="min_purchase_quantity" type="number" name="min_purchase_quantity" placeholder="Enter Min Purchase Quantity"  value="{{ $product->min_purchase_quantity}}" class="form-control">
+          @error('min_purchase_quantity')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+
+        <div class="form-group">
           <label for="discount" class="col-form-label">Discount(%)</label>
           <input id="discount" type="number" name="discount" min="0" max="100" placeholder="Enter discount"  value="{{$product->discount}}" class="form-control">
           @error('discount')
