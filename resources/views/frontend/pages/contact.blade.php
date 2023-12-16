@@ -43,7 +43,7 @@
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
-												<label>Your Subjects<span>*</span></label>
+												<label>Your Subject<span>*</span></label>
 												<input name="subject" type="text" id="subject" placeholder="Enter Subject">
 											</div>
 										</div>
@@ -106,11 +106,11 @@
 	<!--/ End Contact -->
 	
 	<!-- Map Section -->
-	<div class="map-section">
+	<!-- <div class="map-section">
 		<div id="myMap">
 		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217760.2395064944!2d74.16958233204934!3d31.482834785542668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190483e58107d9%3A0xc23abe6ccc7e2462!2sLahore%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1701213950334!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 		</div>
-	</div>
+	</div> -->
 	<!--/ End Map Section -->
 	
 	<!-- Start Shop Newsletter  -->

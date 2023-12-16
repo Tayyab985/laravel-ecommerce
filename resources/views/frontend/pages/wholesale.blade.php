@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','E-SHOP || Whole Sale Page')
+@section('title','K ECOM || Whole Sale Page')
 
 @section('main-content')
     <!-- Breadcrumbs -->
@@ -160,7 +160,7 @@
 										</div> -->
 										<div class="col-12">
 											<div class="form-group">
-												<label>Upload EIN</label>
+												<label>Upload Documents</label>
 												<input name="ein" type="file" id="ein">
 												@error('ein')
 													<span class="text-danger">{{$message}}</span>

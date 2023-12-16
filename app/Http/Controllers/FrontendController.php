@@ -9,7 +9,9 @@ use App\Models\PostCategory;
 use App\Models\Post;
 use App\Models\Cart;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Notification;
 use App\Models\ResellerDocument;
+use App\Notifications\WholeSaleNotification;
 use App\User;
 use Auth;
 use Session;
@@ -365,7 +367,7 @@ class FrontendController extends Controller
             return redirect()->route('home');
         }
         else{
-            request()->session()->flash('error','Invalid email and password pleas try again!');
+            request()->session()->flash('error','Invalid email and password please try again!');
             return redirect()->back();
         }
     }
@@ -451,6 +453,8 @@ class FrontendController extends Controller
         }
         
         if($check){
+            //dd($check);
+            Notification::send($check,new WholeSaleNotification);
             request()->session()->flash('success','Successfully registered');
             return redirect()->route('home');
         }
@@ -469,7 +473,7 @@ class FrontendController extends Controller
             'name'      =>  $data['name'],
             'email'     =>  $data['email'],
             'password'  =>  Hash::make($data['password']),
-            'status'    =>  'active',
+            'status'    =>  'inactive',
             'phone'     =>  $data['phone'],
             'company'   =>  $data['company'],
             'tax_id'    =>  $data['tax_id'],

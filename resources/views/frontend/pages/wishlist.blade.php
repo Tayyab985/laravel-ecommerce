@@ -74,7 +74,7 @@
 	<section class="shop-services section">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 col-md-6 col-12">
+				<div class="col-lg-4 col-md-6 col-12">
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-rocket"></i>
@@ -83,16 +83,14 @@
 					</div>
 					<!-- End Single Service -->
 				</div>
-				<div class="col-lg-3 col-md-6 col-12">
-					<!-- Start Single Service -->
+				<!-- <div class="col-lg-3 col-md-6 col-12">
 					<div class="single-service">
 						<i class="ti-reload"></i>
 						<h4>Free Return</h4>
 						<p>Within 30 days returns</p>
 					</div>
-					<!-- End Single Service -->
-				</div>
-				<div class="col-lg-3 col-md-6 col-12">
+				</div> -->
+				<div class="col-lg-4 col-md-6 col-12">
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-lock"></i>
@@ -101,7 +99,7 @@
 					</div>
 					<!-- End Single Service -->
 				</div>
-				<div class="col-lg-3 col-md-6 col-12">
+				<div class="col-lg-4 col-md-6 col-12">
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-tag"></i>
