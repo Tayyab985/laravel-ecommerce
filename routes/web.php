@@ -209,3 +209,4 @@ use \UniSharp\LaravelFilemanager\Lfm;
     });
 
     Route::post('/ipn', [IpnController::class, 'index'])->name('ipn');
+    Route::get('/invoice', [IpnController::class, 'invoice'])->name('invoice');
