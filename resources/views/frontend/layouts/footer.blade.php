@@ -1,6 +1,6 @@
 
 	<!-- Start Footer Area -->
-	<footer class="footer">
+	<footer class="footer mt-5">
 		<!-- Footer Top -->
 		<div class="footer-top section">
 			<div class="container">
