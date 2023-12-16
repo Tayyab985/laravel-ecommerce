@@ -10,13 +10,13 @@ use Illuminate\Notifications\Notification;
 class WholeSaleNotification extends Notification
 {
     use Queueable;
-
+    protected $message;
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -35,7 +35,8 @@ class WholeSaleNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                ->line('You are registered as a wholesaler. Please wait until admin will approve your request.')
+                ->from('support@kecomdistribution.com')
+                ->line($this->message)
                 ->line('Thank you for using our K ECOM Distribution!');
     }
 

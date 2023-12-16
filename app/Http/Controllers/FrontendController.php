@@ -454,9 +454,9 @@ class FrontendController extends Controller
         
         if($check){
             //dd($check);
-            Notification::send($check,new WholeSaleNotification);
-            request()->session()->flash('success','Successfully registered');
-            return redirect()->route('home');
+            Notification::send($check,new WholeSaleNotification('You are registered as a wholesaler. Please wait until admin will approve your request.'));
+            request()->session()->flash('success','Your account request has been created to admin. You will get an email when it is approved. Thanks!');
+            return redirect()->route('whole-sale');
         }
         else{
             request()->session()->flash('error','Please try again!');
