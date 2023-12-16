@@ -153,14 +153,14 @@ class OrderController extends Controller
             return response()->json(['success' => true, 'order' => $order]);
         }
         else{
-            session()->forget('cart');
-            session()->forget('coupon');
+            // session()->forget('cart');
+            // session()->forget('coupon');
         }
-        Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
+        // Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        // dd($users);        
-        request()->session()->flash('success','Your product successfully placed in order');
-        return redirect()->route('home');
+        // // dd($users);        
+        // request()->session()->flash('success','Your product successfully placed in order');
+        // return redirect()->route('home');
     }
 
     /**
