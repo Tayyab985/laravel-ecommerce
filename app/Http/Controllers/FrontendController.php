@@ -455,7 +455,9 @@ class FrontendController extends Controller
         if($check){
             //dd($check);
             Notification::send($check,new WholeSaleNotification('You are registered as a wholesaler. Please wait until admin will approve your request.'));
-            request()->session()->flash('success','Your account request has been created to admin. You will get an email when it is approved. Thanks!');
+            request()->session()->flash('success','A K Ecom representative will contact you to review your account. If you have registered outside of normal business hours you may not be contacted until the next business day.
+
+            In the meantime, we invite you to browse our site and add items to your wish list.');
             return redirect()->route('whole-sale');
         }
         else{
