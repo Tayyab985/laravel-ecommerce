@@ -255,7 +255,7 @@
                                         <div class="quickview-content">
                                             <h2>{{$product->title}}</h2>
                                             <div class="quickview-ratting-review">
-                                                <div class="quickview-ratting-wrap">
+                                                <!-- <div class="quickview-ratting-wrap">
                                                     <div class="quickview-ratting">
                                                         {{-- <i class="yellow fa fa-star"></i>
                                                         <i class="yellow fa fa-star"></i>
@@ -275,7 +275,7 @@
                                                         @endfor
                                                     </div>
                                                     <a href="#"> ({{$rate_count}} customer review)</a>
-                                                </div>
+                                                </div> -->
                                                 <div class="quickview-stock">
                                                     @if($product->stock >0)
                                                     <span><i class="fa fa-check-circle-o"></i> {{$product->stock}} in stock</span>

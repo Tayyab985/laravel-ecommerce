@@ -33,6 +33,14 @@ class FrontendController extends Controller
         return view('frontend.pages.wholesale');
     }
 
+    public function termsConditions(){
+        return view('frontend.pages.terms-conditions');
+    }
+
+    public function returnPolicy(){
+        return view('frontend.pages.return-policy');
+    }
+
     public function home(){
         $featured=Product::where('status','active')->where('is_featured',1)->orderBy('price','DESC')->limit(2)->get();
         $posts=Post::where('status','active')->orderBy('id','DESC')->limit(3)->get();

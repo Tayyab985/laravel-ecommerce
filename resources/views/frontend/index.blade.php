@@ -169,12 +169,11 @@
     $featured=DB::table('products')->where('is_featured',1)->where('status','active')->orderBy('id','DESC')->limit(1)->get();
 @endphp --}}
 <!-- Start Midium Banner  -->
-<section class="midium-banner">
+<!-- <section class="midium-banner">
     <div class="container">
         <div class="row">
             @if($featured)
                 @foreach($featured as $data)
-                    <!-- Single Banner  -->
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="single-banner">
                             @php
@@ -188,12 +187,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /End Single Banner  -->
                 @endforeach
             @endif
         </div>
     </div>
-</section>
+</section> -->
 <!-- End Midium Banner -->
 
 <!-- Start Most Popular -->
@@ -279,7 +277,6 @@
                                     <div class="list-image overlay">
                                         @php
                                             $photo=explode(',',$product->photo);
-                                            // dd($photo);
                                         @endphp
                                         <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
                                         <a href="{{route('add-to-cart',$product->slug)}}" class="buy"><i class="fa fa-shopping-bag"></i></a>
@@ -412,7 +409,7 @@
                                     <div class="quickview-content">
                                         <h2>{{$product->title}}</h2>
                                         <div class="quickview-ratting-review">
-                                            <div class="quickview-ratting-wrap">
+                                            <!-- <div class="quickview-ratting-wrap">
                                                 <div class="quickview-ratting">
                                                     {{-- <i class="yellow fa fa-star"></i>
                                                     <i class="yellow fa fa-star"></i>
@@ -432,7 +429,7 @@
                                                     @endfor
                                                 </div>
                                                 <a href="#"> ({{$rate_count}} customer review)</a>
-                                            </div>
+                                            </div> -->
                                             <div class="quickview-stock">
                                                 @if($product->stock >0)
                                                 <span><i class="fa fa-check-circle-o"></i> {{$product->stock}} in stock</span>

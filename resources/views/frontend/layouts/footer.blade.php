@@ -14,7 +14,9 @@
 							@php
 								$settings=DB::table('settings')->get();
 							@endphp
-							<p class="text">@foreach($settings as $data) {{$data->short_des}} @endforeach</p>
+							<img src="{{asset('backend/img/payments.png')}}" alt="#">
+
+							<!-- <p class="text">@foreach($settings as $data) {{$data->short_des}} @endforeach</p> -->
 							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span></p>
 						</div>
 						<!-- End Single Widget -->
@@ -25,9 +27,10 @@
 							<h4>Information</h4>
 							<ul>
 								<li><a href="{{route('about-us')}}">About Us</a></li>
-								<!-- <li><a href="#">Faq</a></li>
-								<li><a href="#">Terms & Conditions</a></li> -->
+								<!-- <li><a href="#">Faq</a></li>-->
+								<li><a href="{{route('terms-conditions')}}">Terms & Conditions</a></li> 
 								<li><a href="{{route('contact')}}">Contact Us</a></li>
+								<li><a href="{{route('return-policy')}}">Contact Us</a></li>
 								<!-- <li><a href="#">Help</a></li> -->
 							</ul>
 						</div>
@@ -76,11 +79,11 @@
 								<p>Copyright © {{date('Y')}} -  All Rights Reserved.</p>
 							</div>
 						</div>
-						<div class="col-lg-6 col-12">
+						<!-- <div class="col-lg-6 col-12">
 							<div class="right">
 								<img src="{{asset('backend/img/payments.png')}}" alt="#">
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
