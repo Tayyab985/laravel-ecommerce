@@ -423,6 +423,7 @@ class FrontendController extends Controller
         ]);
       
         $data=$request->all();
+        
         // Remove the 'documents' key if it exists
         if (array_key_exists('documents', $data)) {
             unset($data['documents']);
@@ -439,7 +440,7 @@ class FrontendController extends Controller
         if ($request->hasFile('ein')) {
             $file = $request->file('ein');
             $file_name = time() . '_' . $file->getClientOriginalName();
-           
+            
             $file->storeAs('files', $file_name, 'public');
 
             // Get the URL of the stored file
@@ -462,7 +463,7 @@ class FrontendController extends Controller
         }
         else{
             request()->session()->flash('error','Please try again!');
-            return back();
+            return redirect()->route('whole-sale');
         }
     }
 
