@@ -41,18 +41,17 @@
     <div class="container-fluid">
         <div class="row">
             @php
-            $category_lists=DB::table('categories')->where('status','active')->limit(3)->get();
+            $category_lists=DB::table('categories')->where('status','active')->get();
             @endphp
             @if($category_lists)
                 @foreach($category_lists as $cat)
-                    @if($cat->is_parent==1)
                         <!-- Single Banner  -->
-                        <div class="col-lg-4 col-md-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-12 mb-3">
                             <div class="single-banner">
                                 @if($cat->photo)
                                     <img src="{{$cat->photo}}" alt="{{$cat->photo}}">
                                 @else
-                                    <img src="https://via.placeholder.com/600x370" alt="#">
+                                    <img src="{{ asset('backend/img/thumbnail-default.jpg') }}"  alt="#">
                                 @endif
                                 <div class="content">
                                     <h3>{{$cat->title}}</h3>
@@ -60,7 +59,6 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
                     <!-- /End Single Banner  -->
                 @endforeach
             @endif
@@ -257,44 +255,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="shop-section-title">
-                            <h1>Latest Items</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    @php
-                        $product_lists=DB::table('products')->where('status','active')->orderBy('id','DESC')->limit(6)->get();
-                    @endphp
-                    @foreach($product_lists as $product)
-                        <div class="col-md-4">
-                            <!-- Start Single List  -->
-                            <div class="single-list">
-                                <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <div class="list-image overlay">
-                                        @php
-                                            $photo=explode(',',$product->photo);
-                                        @endphp
-                                        <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                        <a href="{{route('add-to-cart',$product->slug)}}" class="buy"><i class="fa fa-shopping-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 no-padding">
-                                    <div class="content">
-                                        <h4 class="title"><a href="#">{{$product->title}}</a></h4>
-                                        <p class="price with-discount">${{number_format($product->discount,2)}}</p>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <!-- End Single List  -->
-                        </div>
-                    @endforeach
-
-                </div>
+                <div class="list-image">
+                    <img src="{{ asset('storage/photos/1/logos.png') }}" alt="logos.png">
+                </div>                       
             </div>
         </div>
     </div>
