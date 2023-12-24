@@ -30,7 +30,7 @@
 								<!-- <li><a href="#">Faq</a></li>-->
 								<li><a href="{{route('terms-conditions')}}">Terms & Conditions</a></li> 
 								<li><a href="{{route('contact')}}">Contact Us</a></li>
-								<li><a href="{{route('return-policy')}}">Contact Us</a></li>
+								<li><a href="{{route('return-policy')}}">Return Policy</a></li>
 								<!-- <li><a href="#">Help</a></li> -->
 							</ul>
 						</div>
