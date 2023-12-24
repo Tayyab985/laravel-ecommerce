@@ -97,9 +97,9 @@
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
-												<label>Address<span>*</span></label>
-												<input name="address" type="text" id="address" placeholder="Enter Address">
-												@error('address')
+												<label>Billing Address<span>*</span></label>
+												<input name="address" type="text" id="address" placeholder="Enter Billing Address">
+												@error('billing_address')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
 											</div>
@@ -140,11 +140,20 @@
 												@enderror
 											</div>
 										</div>
-										<div class="col-12">
+										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Zip<span>*</span></label>
 												<input name="zip" type="text" id="zip" placeholder="Enter Zip">
 												@error('zip')
+													<span class="text-danger">{{$message}}</span>
+												@enderror
+											</div>
+										</div>
+										<div class="col-lg-6 col-12">
+											<div class="form-group">
+												<label>Shipping Address</label>
+												<input name="shipping_address" type="text" id="shipping_address" placeholder="Enter Shipping Address">
+												@error('shipping_address')
 													<span class="text-danger">{{$message}}</span>
 												@enderror
 											</div>

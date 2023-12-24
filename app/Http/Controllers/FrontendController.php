@@ -33,6 +33,14 @@ class FrontendController extends Controller
         return view('frontend.pages.wholesale');
     }
 
+    public function termsConditions(){
+        return view('frontend.pages.terms-conditions');
+    }
+
+    public function returnPolicy(){
+        return view('frontend.pages.return-policy');
+    }
+
     public function home(){
         $featured=Product::where('status','active')->where('is_featured',1)->orderBy('price','DESC')->limit(2)->get();
         $posts=Post::where('status','active')->orderBy('id','DESC')->limit(3)->get();
@@ -359,16 +367,23 @@ class FrontendController extends Controller
     public function login(){
         return view('frontend.pages.login');
     }
+
     public function loginSubmit(Request $request){
-        $data= $request->all();
+        $data = $request->all();
+        $user = User::where('email',$data['email'])->first();
+        if($user && $user->status == 'inactive'){
+            request()->session()->flash('error','This Email is Not Active OR Not Registered!');
+            return redirect()->route('login.form');
+        }
+
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'],'status'=>'active'])){
             Session::put('user',$data['email']);
-            request()->session()->flash('success','Successfully login');
+            request()->session()->flash('success','Successfully Login');
             return redirect()->route('home');
         }
         else{
-            request()->session()->flash('error','Invalid email and password please try again!');
-            return redirect()->back();
+            request()->session()->flash('error','Invalid Password. Please Try Again!');
+            return redirect()->route('login.form');
         }
     }
 
@@ -417,7 +432,7 @@ class FrontendController extends Controller
             'country'=>'string|required',
             'state'=>'string|required',
             'zip'=>'required',
-            'comments'=>'string|required',
+            'comments'=>'string|required'
             // 'documents'=>'required',
             //'ein'=>'required',
         ]);
@@ -454,7 +469,6 @@ class FrontendController extends Controller
         }
         
         if($check){
-            //dd($check);
             Notification::send($check,new WholeSaleNotification('You are registered as a wholesaler. Please wait until admin will approve your request.'));
             request()->session()->flash('success','A K Ecom representative will contact you to review your account. If you have registered outside of normal business hours you may not be contacted until the next business day.
 
@@ -487,6 +501,7 @@ class FrontendController extends Controller
             'state'     =>  $data['state'],
             'zip'       =>  $data['zip'],
             'comments'  =>  $data['comments'],
+            'shipping_address'   =>  $data['shipping_address'],
         ]);
     }
 

@@ -30,7 +30,11 @@
           </thead>
           <tbody>
             @foreach($users as $user)   
-                <tr>
+              @if($user->status == 'inactive')
+              <tr style="background-color:red; color:white">
+              @else 
+              <tr>
+              @endif
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
@@ -118,6 +122,7 @@
   <script>
       
       $('#user-dataTable').DataTable( {
+        "order": [[0, 'desc']], 
             "columnDefs":[
                 {
                     "orderable":false,
