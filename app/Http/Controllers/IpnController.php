@@ -60,7 +60,7 @@ class IpnController extends Controller
     
     }
 
-    public function invioce() {
+    public function invoice() {
         request()->session()->flash('success','Your product successfully placed in order');
         return redirect()->route('home');
     }
